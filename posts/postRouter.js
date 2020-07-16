@@ -1,13 +1,21 @@
 const express = require('express');
+const Post = require('./postDb');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    
-  }
-  catch {
+    const posts = await Post.get();
 
+    res.status(200).json({
+      message: "Success!",
+      posts
+    })
+  }
+  catch(err) {
+    res.status(500).json({
+      error: "Cannot get posts from database."
+    })
   }
 });
 
